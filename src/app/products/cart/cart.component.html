@@ -1,0 +1,37 @@
+<div class="cart-container">
+  <h2 class="cart-title">🛒 Your Cart ({{ cartItems.length }} items)</h2>
+
+  <div class="empty-cart" *ngIf="cartItems.length === 0">
+    <p>Your cart is empty.</p>
+  </div>
+
+  <ul class="cart-items" *ngIf="cartItems.length > 0">
+    <li *ngFor="let item of cartItems" class="cart-item">
+      <div class="cart-product-card">
+        <img
+          [src]="item.images[0]"
+          alt="{{ item.title }}"
+          class="product-image"
+        />
+
+        <div class="product-info">
+          <h3 class="product-title">{{ item.title }}</h3>
+          <p class="product-price"><strong>Price:</strong> ₹{{ item.price }}</p>
+          <p class="product-description">
+            <strong>Description:</strong> {{ item.description }}
+          </p>
+          <p class="product-meta">
+            <strong>Category:</strong> {{ item.category }}
+          </p>
+          <p class="product-meta"><strong>Brand:</strong> {{ item.brand }}</p>
+          <p class="product-meta">
+            <strong>Status:</strong> {{ item.availabilityStatus }}
+          </p>
+          <p class="product-stock" [appStockHighlight]="item.stock">
+            <strong>Stock:</strong> {{ item.stock }}
+          </p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

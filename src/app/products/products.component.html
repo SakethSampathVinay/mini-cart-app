@@ -1,0 +1,31 @@
+<div class="toolbar">
+  <input
+    type="text"
+    class="search-input"
+    placeholder="Search by product or brand..."
+    [(ngModel)]="searchInput"
+  />
+
+  <select class="filter-select" [(ngModel)]="filters">
+    <option value="All">All Products</option>
+    <option value="In Stock">In Stock</option>
+    <option value="Out of Stock">Out of Stock</option>
+  </select>
+
+  @if(showCart) {
+  <button class="cart-button" (click)="toggleCart()">Back</button>
+  } @else if (!showCart) {
+  <button class="cart-button" (click)="toggleCart()">🛒 My Cart</button>
+  }
+</div>
+
+<app-cart *ngIf="showCart" [cartItems]="cartList"></app-cart>
+
+<div *ngIf="!showCart" class="card-grid">
+  <app-product-card
+    *ngFor="let product of filteredResults()"
+    [product]="product"
+    (addToCart)="handleAddToCart($event)"
+    appZoom
+  ></app-product-card>
+</div>
